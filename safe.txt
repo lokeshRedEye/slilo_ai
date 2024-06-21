@@ -1,0 +1,43 @@
+import 'dotenv/config';
+import { GoogleGenerativeAI } from "@google/generative-ai";
+import express from 'express';
+import { name } from "ejs";
+
+const app = express()
+
+app.use(express.urlencoded({ extended: true }));
+app.set('view engine', 'ejs');
+app.use(express.static("public"));
+
+
+
+const API_KEY = process.env.API_KEY;
+console.log(API_KEY);
+
+
+app.get("/"  , (req, res) => {
+    res.render("index")
+})
+
+
+
+
+const genAI = new GoogleGenerativeAI(API_KEY);
+
+const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash"});
+
+async function run() {
+    const prompt = "Write a story about a doctor"  
+  
+    const result = await model.generateContent(prompt);
+    const response = await result.response;
+    const text = response.text();
+    console.log(text);
+  }
+  
+  run();
+
+
+  app.listen(3000 , () => {
+    console.log("server is running ! ");
+  })

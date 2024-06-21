@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>SILO AI Chatbot</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+    <style>
+        body {
+
+            /* background-color: #121212; */
+            background-color: #949695;
+background-image: url("https://www.transparenttextures.com/patterns/cartographer.png");
+/* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */ 
+            color: #e0e0e0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .navbar, .footer {
+            background-color: #1f1f1f;
+        }
+        .navbar-brand img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+        }
+        .navbar-nav .nav-link, .footer {
+            color: #e0e0e0;
+        }
+        .navbar-nav .nav-link:hover {
+            color: #ffffff;
+        }
+        .chat-container {
+            max-width: 800px;
+            margin: 50px auto;
+            background-color: #000000;
+background-image: url("https://www.transparenttextures.com/patterns/cream-paper.png");
+/* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+        }
+        .chat-box {
+            height: 400px;
+            overflow-y: auto;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 10px;
+            background-color: #000000;
+        background-image: url("https://www.transparenttextures.com/patterns/beige-paper.png");
+/* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
+        }
+        .chat-box p {
+            margin: 10PX;
+            padding: 10px;
+            border-radius: 5px;
+            word-wrap: break-word;
+            opacity: 0.75;
+        }
+        .user-message {
+            background-color: #333333;
+            text-align: right;
+            margin-bottom: 20px;
+            border: 1px solid #444;
+        }
+        .bot-message {
+            background-color: #2979ff;
+            color: #ffffff;
+            text-align: left;
+            margin-bottom: 20px;
+            border: 1px solid #444;
+        }
+        .input-group {
+            margin-top: 15px;
+        }
+        .form-control {
+            background-color: #333;
+            border: 1px solid #444;
+            color: #e0e0e0;
+        }
+        .form-control:focus {
+            background-color: #444;
+            color: #ffffff;
+            box-shadow: none;
+            border: 1px solid #555;
+        }
+        .btn-primary {
+            background-color: #2979ff;
+            border: none;
+        }
+        .btn-primary:hover {
+            background-color: #1565c0;
+        }
+        .icon-send {
+            fill: #ffffff;
+            width: 24px;
+            height: 24px;
+        }
+        .footer {
+            padding: 15px;
+            text-align: center;
+            color: #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="silo.png" width="50" height="50" alt="SILO AI Logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">SILO AI</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+                </ul>
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    
+    <div class="container chat-container">
+        <h2 class="text-center">SILO AI Chatbot</h2>
+        <div class="chat-box" id="chatBox"></div>
+        <form id="chatForm">
+            <div class="input-group">
+                <input type="text" id="userInput" class="form-control" placeholder="Type a message..." required />
+                <button class="btn btn-primary" type="submit">
+                    <svg class="icon-send" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M3 2v20l18-10L3 2zm4.894 9.553l6.853 1.714-6.853 1.714V11.553z"/>
+                    </svg>
+                </button>
+            </div>
+        </form>
+    </div>
+    
+    <footer class="footer">
+        <p>&copy; 2024 SILO AI || Design: Siva & Lokesh</p>
+    </footer>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+    <script>
+        document.getElementById('chatForm').addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const userInput = document.getElementById('userInput').value;
+            const chatBox = document.getElementById('chatBox');
+
+            // Add user's message to chat box
+            const userMessage = document.createElement('p');
+            userMessage.className = 'user-message';
+            userMessage.textContent = userInput;
+            chatBox.appendChild(userMessage);
+
+            // Clear the input field
+            document.getElementById('userInput').value = '';
+
+            // Send user's message to the backend
+            const response = await fetch('/chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ message: userInput }),
+            });
+
+            const data = await response.json();
+            const botMessage = document.createElement('p');
+            botMessage.className = 'bot-message';
+            botMessage.textContent = data.response;
+            chatBox.appendChild(botMessage);
+
+            // Scroll to the bottom of the chat box
+            chatBox.scrollTop = chatBox.scrollHeight;
+        });
+    </script>
+</body>
+</html>
